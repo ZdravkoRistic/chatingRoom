@@ -1,8 +1,15 @@
-// Konfiguracija EmailJS servisa
-// emailjs.init("goGfFk-avO-IuTjae"); // Zamenite sa vašim javnim ključem
+
 
 // Funkcija za slanje notifikacije putem e-maila
+
+let notificationSent = false;
+
+
 function sendNotification() {
+
+  if (notificationSent) {
+    return;
+  }
   const templateParams = {
     from_name: "Sender Name",
     to_name: "Recipient Name",
@@ -12,6 +19,7 @@ function sendNotification() {
   emailjs.send("service_zfltb7k", "template_4e9wmad", templateParams).then(
     function (response) {
       console.log("E-mail uspešno poslat:", response.status, response.text);
+      notificationSent = true;
     },
     function (error) {
       console.log("Greška prilikom slanja e-maila:", error);
